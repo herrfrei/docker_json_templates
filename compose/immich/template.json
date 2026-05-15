@@ -1,5 +1,5 @@
 {
-  "name": "immich-compose (GPU accelerated)",
+  "name": "immich-compose-gpu",
   "category": [ "media" ],
   "description": "Easily back up, organize, and manage your photos on your own server. Immich helps you browse, search and organize your photos and videos with ease.",
   "website": "https://immich.app/",
