@@ -1,0 +1,9 @@
+{
+  "name": "immich-compose (GPU accelerated)",
+  "category": [ "media" ],
+  "description": "Easily back up, organize, and manage your photos on your own server. Immich helps you browse, search and organize your photos and videos with ease.",
+  "website": "https://immich.app/",
+  "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/immich.png",
+  "support": "https://github.com/immich-app/immich/issues",
+  "web_ui_url": "http://[ADDRESS]:[PORT:2283]/"
+}
