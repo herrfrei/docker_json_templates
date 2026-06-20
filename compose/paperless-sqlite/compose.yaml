@@ -1,0 +1,92 @@
+name: paperless
+
+services:
+  broker:
+    container_name: paperless-redis
+    image: docker.io/library/redis:7
+    volumes:
+      - ${PAPERLESS_REDIS}:/data
+    restart: unless-stopped
+    user: "${USERMAP_UID}:${USERMAP_GID}"
+    sysctls:
+      - net.core.somaxconn=511
+    cap_add:
+      - SYS_RESOURCE
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  webserver:
+    container_name: paperless
+    image: ghcr.io/paperless-ngx/paperless-ngx:${PAPERLESS_VERSION}
+    restart: unless-stopped
+    depends_on:
+      - broker
+    ports:
+      - "8050:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ${PAPERLESS_DATA}:/usr/src/paperless/data
+      - ${PAPERLESS_MEDIA}:/usr/src/paperless/media
+      - ${PAPERLESS_EXPORT}:/usr/src/paperless/export
+      - ${PAPERLESS_CONSUME}:/usr/src/paperless/consume
+    environment:
+      PAPERLESS_URL: ${PAPERLESS_URL}
+      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY}
+      USERMAP_UID: ${USERMAP_UID}
+      USERMAP_GID: ${USERMAP_GID}
+      PAPERLESS_TIME_ZONE: ${PAPERLESS_TIME_ZONE}
+      PAPERLESS_OCR_LANGUAGE: ${PAPERLESS_OCR_LANGUAGE}
+      # Enable Tika for document conversion (optional)
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000/
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+    deploy:
+      resources:
+        limits:
+          memory: 2048M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  gotenberg:
+    container_name: paperless-gotenberg
+    image: gotenberg/gotenberg:8
+    restart: unless-stopped
+    environment:
+      CHROMIUM_DISABLE_ROUTES: 1
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  tika:
+    container_name: paperless-tika
+    image: apache/tika:2.9.2.1
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M

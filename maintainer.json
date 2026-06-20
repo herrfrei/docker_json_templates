@@ -10,7 +10,12 @@
     {
       "name": "paperless-ngx",
       "path": "compose/paperless",
-      "description": "Paperless-ngx - Document management system for organizing, scanning, and archiving documents"
+      "description": "Paperless-ngx with PostgreSQL - Document management system for organizing, scanning, and archiving documents"
+    },
+    {
+      "name": "paperless-ngx-sqlite",
+      "path": "compose/paperless-sqlite",
+      "description": "Paperless-ngx with SQLite - Simplified document management system for smaller deployments"
     }
   ]
 }

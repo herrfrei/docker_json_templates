@@ -9,11 +9,17 @@ This repository contains docker-compose templates for various applications optim
 - **Description:** Self-hosted photo and video management system with AI-powered organization
 - **Features:** GPU acceleration support, machine learning for facial recognition, automatic backups
 
-### Paperless-ngx
+### Paperless-ngx (PostgreSQL)
 - **Location:** `compose/paperless/`
 - **Description:** Document management system for organizing, scanning, and archiving documents
 - **Features:** OCR, metadata extraction, web-based access, document consumption, automatic backups
 - **Services:** Paperless-ngx, PostgreSQL, Redis, Gotenberg (PDF conversion), Tika (document parsing), Backup service
+
+### Paperless-ngx (SQLite)
+- **Location:** `compose/paperless-sqlite/`
+- **Description:** Simplified Paperless-ngx setup with SQLite database
+- **Features:** Single container setup, no external database needed, ideal for smaller deployments
+- **Services:** Paperless-ngx, Gotenberg (PDF conversion), Tika (document parsing)
 
 ## Usage
 
