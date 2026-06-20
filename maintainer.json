@@ -1,4 +1,16 @@
 {
   "maintainer": "herrfrei",
-  "donation": ""
+  "donation": "",
+  "templates": [
+    {
+      "name": "immich-compose-gpu",
+      "path": "compose/immich",
+      "description": "Immich - Self-hosted photo and video management system"
+    },
+    {
+      "name": "paperless-ngx",
+      "path": "compose/paperless",
+      "description": "Paperless-ngx - Document management system for organizing, scanning, and archiving documents"
+    }
+  ]
 }
