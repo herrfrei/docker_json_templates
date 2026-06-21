@@ -1,8 +1,14 @@
 # docker_json_templates
 
-This repository contains docker-compose templates for various applications optimized for MOS (My Home Server).
+This repository contains Docker Compose templates for various applications optimized for MOS (My Home Server).
 
 ## Available Templates
+
+### Forgejo
+- **Location:** `compose/forgejo/`
+- **Description:** A lightweight, self-hosted Git service. A community-driven fork of Gitea, designed to be minimal and resource-efficient.
+- **Features:** Ultra-lightweight, Web UI, Git SSH access, issue tracking, pull requests, minimal dependencies
+- **Services:** Forgejo (single container with SQLite database)
 
 ### Immich
 - **Location:** `compose/immich/`

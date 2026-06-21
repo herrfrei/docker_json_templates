@@ -1,0 +1,9 @@
+{
+  "name": "forgejo",
+  "category": ["version-control", "development"],
+  "description": "A lightweight, self-hosted Git service. A community-driven fork of Gitea, designed to be minimal and resource-efficient.",
+  "website": "https://codeberg.org/forgejo/forgejo",
+  "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/forgejo.png",
+  "support": "https://codeberg.org/forgejo/forgejo/issues",
+  "web_ui_url": "http://[ADDRESS]:[WEB_PORT:3000]/"
+}

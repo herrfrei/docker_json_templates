@@ -16,6 +16,11 @@
       "name": "paperless-ngx-sqlite",
       "path": "compose/paperless-sqlite",
       "description": "Paperless-ngx with SQLite - Simplified document management system for smaller deployments"
+    },
+    {
+      "name": "forgejo-compose",
+      "path": "compose/forgejo",
+      "description": "Forgejo - Lightweight, self-hosted Git service (community-driven fork of Gitea)"
     }
   ]
 }

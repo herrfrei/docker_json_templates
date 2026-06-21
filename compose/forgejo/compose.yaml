@@ -1,0 +1,31 @@
+name: forgejo
+
+services:
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:${FORGEJO_VERSION:-latest}
+    container_name: forgejo
+    restart: unless-stopped
+    environment:
+      - APP_NAME=Forgejo: The lightweight Forge
+      - RUN_MODE=prod
+      - USER=git
+      - USER_UID=1000
+      - USER_GID=1000
+      - SSH_DOMAIN=localhost
+      - SSH_PORT=${SSH_PORT}
+      - HTTP_PORT=${WEB_PORT}
+      - ROOT_URL=http://[ADDRESS]:[WEB_PORT]/
+      - DATABASE_TYPE=sqlite3
+      - DATABASE_PATH=/data/forgejo.db
+      - TIMEZONE=${TZ}
+    volumes:
+      - ${DATA_LOCATION}:/data
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - '${WEB_PORT}:3000'
+      - '${SSH_PORT}:2222'
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:${WEB_PORT}/']
+      interval: 30s
+      timeout: 10s
+      retries: 3
