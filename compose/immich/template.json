@@ -4,6 +4,6 @@
   "description": "Easily back up, organize, and manage your photos on your own server. Immich helps you browse, search and organize your photos and videos with ease.",
   "website": "https://immich.app/",
   "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/immich.png",
-  "support": "https://github.com/immich-app/immich/issues",
+  "support": "https://github.com/herrfrei/docker_json_templates",
   "web_ui_url": "http://[ADDRESS]:[PORT:2283]/"
 }

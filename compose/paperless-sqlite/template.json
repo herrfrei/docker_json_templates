@@ -3,7 +3,7 @@
   "category": ["productivity", "document-management"],
   "description": "Paperless-ngx with SQLite - a document management system that transforms your loose documents into a searchable, indexed, and organized collection. This is a single-container setup ideal for smaller deployments.",
   "website": "https://docs.paperless-ngx.com/",
-  "icon": "https://cdn.jsdelivr.net/gh/paperless-ngx/paperless-ngx@main/assets/logo/web/svg/paperless-logo-icon.svg",
-  "support": "https://github.com/paperless-ngx/paperless-ngx/issues",
+  "icon": "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/main/docs/assets/favicon.png",
+  "support": "https://github.com/herrfrei/docker_json_templates",
   "web_ui_url": "http://[ADDRESS]:[PORT:8050]/"
 }
