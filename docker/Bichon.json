@@ -9,6 +9,9 @@
   "description": "Bichon ist ein selbst gehosteter, in Rust geschriebener E-Mail-Archivierer. Er lädt E-Mails per IMAP herunter, erstellt einen Volltextindex und stellt eine REST-API mit integrierter WebUI bereit. Kein E-Mail-Client - Bichon versendet keine Mails, sondern archiviert und durchsucht sie.",
   "category": [ "Productivity", "Backup" ],
   "network": "bridge",
+  "custom_ip": "",
+  "default_shell": "sh",
+  "gpu": false,
   "privileged": false,
   "webui": "http://[IP]:[PORT:15630]",
   "extra_params": "--user 1000:1000",
@@ -22,7 +25,7 @@
     }
   ],
 
-  "volumes": [
+  "paths": [
     {
       "container": "/data",
       "host": "/mnt/cache/appdata/bichon",
@@ -31,7 +34,9 @@
     }
   ],
 
-  "environment": [
+  "devices": [],
+
+  "variables": [
     {
       "name": "BICHON_ROOT_DIR",
       "target": "BICHON_ROOT_DIR",
