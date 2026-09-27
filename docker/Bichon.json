@@ -1,0 +1,76 @@
+{
+  "name": "Bichon",
+  "repository": "rustmailer/bichon:latest",
+  "registry": "https://hub.docker.com/r/rustmailer/bichon",
+  "project": "https://github.com/rustmailer/bichon",
+  "support": "https://github.com/rustmailer/bichon/issues",
+  "readme_url": "https://github.com/rustmailer/bichon#docker-recommended",
+  "icon": "https://raw.githubusercontent.com/<user-name>/<repo-name>/main/images/Bichon.png",
+  "description": "Bichon ist ein selbst gehosteter, in Rust geschriebener E-Mail-Archivierer. Er lädt E-Mails per IMAP herunter, erstellt einen Volltextindex und stellt eine REST-API mit integrierter WebUI bereit. Kein E-Mail-Client - Bichon versendet keine Mails, sondern archiviert und durchsucht sie.",
+  "category": [ "Productivity", "Backup" ],
+  "network": "bridge",
+  "privileged": false,
+  "webui": "http://[IP]:[PORT:15630]",
+  "extra_params": "--user 1000:1000",
+
+  "ports": [
+    {
+      "container": 15630,
+      "host": 15630,
+      "protocol": "tcp",
+      "description": "HTTP-Port der WebUI / REST-API"
+    }
+  ],
+
+  "volumes": [
+    {
+      "container": "/data",
+      "host": "/mnt/cache/appdata/bichon",
+      "mode": "rw",
+      "description": "Bichon-Datenverzeichnis (Index, Blob-Storage, Metadaten). Muss auf lokalem Dateisystem liegen (kein NFS/SMB)."
+    }
+  ],
+
+  "environment": [
+    {
+      "name": "BICHON_ROOT_DIR",
+      "target": "BICHON_ROOT_DIR",
+      "default": "/data",
+      "description": "Pflichtfeld. Absoluter Pfad für alle persistenten Daten (innerhalb des Containers).",
+      "required": true,
+      "mask": false
+    },
+    {
+      "name": "BICHON_ENCRYPT_PASSWORD",
+      "target": "BICHON_ENCRYPT_PASSWORD",
+      "default": "",
+      "description": "Pflichtfeld. Passwort zur Verschlüsselung gespeicherter Zugangsdaten (IMAP-Passwörter, OAuth-Tokens). Unbedingt durch ein sicheres Passwort ersetzen!",
+      "required": true,
+      "mask": true
+    },
+    {
+      "name": "BICHON_LOG_LEVEL",
+      "target": "BICHON_LOG_LEVEL",
+      "default": "info",
+      "description": "Log-Level: trace, debug, info, warn, error.",
+      "required": false,
+      "mask": false
+    },
+    {
+      "name": "BICHON_ENABLE_SMTP",
+      "target": "BICHON_ENABLE_SMTP",
+      "default": "false",
+      "description": "Eingebetteten SMTP-Empfänger aktivieren (nur Empfang, kein Versand).",
+      "required": false,
+      "mask": false
+    },
+    {
+      "name": "BICHON_PUBLIC_URL",
+      "target": "BICHON_PUBLIC_URL",
+      "default": "http://localhost:15630",
+      "description": "Öffentlich erreichbare URL, wird für OAuth-Redirects und Dokumentation verwendet.",
+      "required": false,
+      "mask": false
+    }
+  ]
+}
