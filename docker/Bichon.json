@@ -1,81 +1,81 @@
 {
   "name": "Bichon",
-  "repository": "rustmailer/bichon:latest",
+  "repo": "rustmailer/bichon:latest",
   "registry": "https://hub.docker.com/r/rustmailer/bichon",
-  "project": "https://github.com/rustmailer/bichon",
-  "support": "https://github.com/rustmailer/bichon/issues",
-  "readme_url": "https://github.com/rustmailer/bichon#docker-recommended",
-  "icon": "https://raw.githubusercontent.com/<user-name>/<repo-name>/main/images/Bichon.png",
-  "description": "Bichon ist ein selbst gehosteter, in Rust geschriebener E-Mail-Archivierer. Er lädt E-Mails per IMAP herunter, erstellt einen Volltextindex und stellt eine REST-API mit integrierter WebUI bereit. Kein E-Mail-Client - Bichon versendet keine Mails, sondern archiviert und durchsucht sie.",
-  "category": [ "Productivity", "Backup" ],
   "network": "bridge",
-  "custom_ip": "",
+  "custom_ip": null,
   "default_shell": "sh",
-  "gpu": false,
   "privileged": false,
-  "webui": "http://[IP]:[PORT:15630]",
-  "extra_params": "--user 1000:1000",
-
-  "ports": [
-    {
-      "container": 15630,
-      "host": 15630,
-      "protocol": "tcp",
-      "description": "HTTP-Port der WebUI / REST-API"
-    }
-  ],
-
+  "extra_parameters": "--user 1000:1000",
+  "post_parameters": null,
+  "web_ui_url": "http://[IP]:[PORT:15630]",
+  "icon": "https://raw.githubusercontent.com/herrfrei/docker_json_templates/master/herrfrei/images/Bichon.png",
+  "project": "https://github.com/rustmailer/bichon",
+  "support": "https://github.com/herrfrei/docker_json_templates/issues",
+  "description": "Bichon is a self-hosted email archiver written in Rust. It downloads emails via IMAP, builds a full-text index, and provides a REST API with an integrated WebUI. It is not an email client — Bichon does not send emails, it only archives and searches them.",
   "paths": [
     {
-      "container": "/data",
+      "name": "Data Dir",
       "host": "/mnt/cache/appdata/bichon",
+      "container": "/data",
       "mode": "rw",
-      "description": "Bichon-Datenverzeichnis (Index, Blob-Storage, Metadaten). Muss auf lokalem Dateisystem liegen (kein NFS/SMB)."
+      "description": "Bichon data directory (index, blob storage, metadata). Must be located on a local filesystem (not NFS/SMB).",
+      "required": true
     }
   ],
-
-  "devices": [],
-
+  "ports": [
+    {
+      "name": "TCP - WebUI/REST API",
+      "host": "15630",
+      "container": "15630",
+      "protocol": "tcp",
+      "description": "HTTP port for the WebUI / REST API",
+      "required": true,
+      "mask": false
+    }
+  ],
   "variables": [
     {
-      "name": "BICHON_ROOT_DIR",
-      "target": "BICHON_ROOT_DIR",
-      "default": "/data",
-      "description": "Pflichtfeld. Absoluter Pfad für alle persistenten Daten (innerhalb des Containers).",
+      "name": "Root Directory",
+      "key": "BICHON_ROOT_DIR",
+      "value": "/data",
+      "description": "Required. Absolute path for all persistent data (inside the container).",
       "required": true,
       "mask": false
     },
     {
-      "name": "BICHON_ENCRYPT_PASSWORD",
-      "target": "BICHON_ENCRYPT_PASSWORD",
-      "default": "",
-      "description": "Pflichtfeld. Passwort zur Verschlüsselung gespeicherter Zugangsdaten (IMAP-Passwörter, OAuth-Tokens). Unbedingt durch ein sicheres Passwort ersetzen!",
+      "name": "Encrypt Password",
+      "key": "BICHON_ENCRYPT_PASSWORD",
+      "value": "",
+      "description": "Required. Password used to encrypt stored credentials (IMAP passwords, OAuth tokens). Be sure to replace this with a secure password!",
       "required": true,
       "mask": true
     },
     {
-      "name": "BICHON_LOG_LEVEL",
-      "target": "BICHON_LOG_LEVEL",
-      "default": "info",
-      "description": "Log-Level: trace, debug, info, warn, error.",
+      "name": "Log Level",
+      "key": "BICHON_LOG_LEVEL",
+      "value": "info",
+      "description": "Log level: trace, debug, info, warn, error.",
       "required": false,
       "mask": false
     },
     {
-      "name": "BICHON_ENABLE_SMTP",
-      "target": "BICHON_ENABLE_SMTP",
-      "default": "false",
-      "description": "Eingebetteten SMTP-Empfänger aktivieren (nur Empfang, kein Versand).",
+      "name": "Enable SMTP",
+      "key": "BICHON_ENABLE_SMTP",
+      "value": "false",
+      "description": "Enable the embedded SMTP receiver (receive only, no sending).",
       "required": false,
       "mask": false
     },
     {
-      "name": "BICHON_PUBLIC_URL",
-      "target": "BICHON_PUBLIC_URL",
-      "default": "http://localhost:15630",
-      "description": "Öffentlich erreichbare URL, wird für OAuth-Redirects und Dokumentation verwendet.",
+      "name": "Public URL",
+      "key": "BICHON_PUBLIC_URL",
+      "value": "http://localhost:15630",
+      "description": "Publicly reachable URL, used for OAuth redirects and documentation.",
       "required": false,
       "mask": false
     }
-  ]
+  ],
+  "devices": [],
+  "labels": []
 }
