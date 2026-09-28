@@ -9,7 +9,7 @@
   "extra_parameters": "--user 1000:1000",
   "post_parameters": null,
   "web_ui_url": "http://[IP]:[PORT:15630]",
-  "icon": "https://raw.githubusercontent.com/herrfrei/docker_json_templates/master/herrfrei/images/Bichon.png",
+  "icon": "https://cdn.jsdelivr.net/gh/herrfrei/docker_json_templates@main/images/Bichon.png",
   "project": "https://github.com/rustmailer/bichon",
   "support": "https://github.com/herrfrei/docker_json_templates/issues",
   "description": "Bichon is a self-hosted email archiver written in Rust. It downloads emails via IMAP, builds a full-text index, and provides a REST API with an integrated WebUI. It is not an email client — Bichon does not send emails, it only archives and searches them.",
